@@ -1,0 +1,18 @@
+# Run WITHOUT Docker: uses the PostgreSQL installed on your laptop
+# and a simple in-memory cache instead of Redis.
+#
+# 1. Copy this file to application-local.yml (same folder)
+# 2. Fill in your PostgreSQL password below
+# application-local.yml is git-ignored, so your secrets never go to GitHub.
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cinestream
+    username: postgres
+    password: YOUR_POSTGRES_PASSWORD
+  cache:
+    type: simple
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration

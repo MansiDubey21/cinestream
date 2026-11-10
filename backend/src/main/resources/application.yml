@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cinestream-backend
+  profiles:
+    # 'local' = run on your laptop without Docker (see application-local.yml)
+    # docker-compose sets this to 'docker'
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/cinestream}
+    username: ${DB_USER:cinestream}
+    password: ${DB_PASSWORD:cinestream}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6380}
+  cache:
+    type: redis
+
+app:
+  jwt:
+    # Must be at least 32 characters. Override in production!
+    secret: ${JWT_SECRET:change-me-to-a-long-random-secret-key-at-least-32-chars}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  tvmaze:
+    # Free TV data API, no key needed
+    base-url: https://api.tvmaze.com
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
+  cache:
+    ttl-minutes: ${CACHE_TTL_MINUTES:30}

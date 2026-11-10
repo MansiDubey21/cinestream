@@ -1,0 +1,9 @@
+.env
+node_modules/
+frontend/dist/
+backend/target/
+.idea/
+.vscode/
+*.log
+.DS_Store
+backend/src/main/resources/application-local.yml
